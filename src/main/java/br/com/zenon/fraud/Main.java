@@ -24,6 +24,14 @@ public class Main {
         System.out.println("---------Imprimir as 10 primeiras linhas------------");
         transactions.stream().limit(10).forEach(System.out::println);
 
+
+        System.out.println("----------------------");
+        System.out.println("Identificando erro e fazendo tratamento");
+        List<Transaction> transactionBadErro = transactionIngestor.TransactionsList("data/paysim_with_bad_data.csv");
+        System.out.println(transactionBadErro.size());
+        transactionBadErro.forEach(System.out::println);
+
     }
+
 
 }
