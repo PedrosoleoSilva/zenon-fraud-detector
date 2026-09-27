@@ -67,9 +67,9 @@ public class Main {
 
         Long endTime = System.nanoTime();
 
-    System.out.println("Tempo de busca durou em ms: " + (endTime - startTime) / 1_000_000.0);
+        System.out.println("Tempo de busca durou em ms: " + (endTime - startTime) / 1_000_000.0);
 
-    transactionRepository = new TransactionMapRepository(transactions);
+        transactionRepository = new TransactionMapRepository(transactions);
 
         startTime = System.nanoTime();
         transactionRepository.TransactionsName(name).ifPresentOrElse(System.out::println,
