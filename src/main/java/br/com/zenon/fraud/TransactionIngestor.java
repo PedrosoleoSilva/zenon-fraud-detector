@@ -22,6 +22,18 @@ public class TransactionIngestor {
             throw new RuntimeException("Erro ao ler o arquivo: " + file, e);
         }
     }
+    public List<Transaction> TransactionsIsFraud(String file) {
+        Path path = Path.of(file);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            return lines.stream().skip(1).map(this::ParseTransaction).limit(50000)
+                    .filter(Optional::isPresent).map(Optional::get).toList();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao ler o arquivo: " + file, e);
+        }
+    }
+
 
     public Optional<Transaction> ParseTransaction(String linha) {
         try {
