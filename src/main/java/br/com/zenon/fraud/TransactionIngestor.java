@@ -10,11 +10,12 @@ import java.util.Optional;
 
 public class TransactionIngestor {
 
+   public static final int limiteLeitura = 100_000;
     public List<Transaction> TransactionsList(String file) {
         Path path = Path.of(file);
         try {
             List<String> lines = Files.readAllLines(path);
-            return lines.stream().skip(1).limit(1000)
+            return lines.stream().skip(1).limit(limiteLeitura)
                     .map(this::ParseTransaction)
                     .filter(Optional::isPresent).map(Optional::get).toList();
 

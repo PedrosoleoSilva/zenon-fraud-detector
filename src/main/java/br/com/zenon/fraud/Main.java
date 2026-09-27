@@ -15,12 +15,13 @@ public class Main {
                  new TransactionCustomerDest("C873221189", new BigDecimal("6510099.11"), new BigDecimal("7360101.63")), true, false);
 
         var transactionIngestor = new TransactionIngestor();
-      /*   System.out.println(transaction);
+        List<Transaction> transactions = transactionIngestor.TransactionsList("data/PS_20174392719_1491204439457_log.csv");
+          System.out.println(transaction);
          System.out.println("----------------------");
          System.out.println(transactionDuo);
 
 
-        List<Transaction> transactions = transactionIngestor.TransactionsList("data/PS_20174392719_1491204439457_log.csv");
+
         System.out.println(transactions.size());
         System.out.println("---------Imprimir as 10 primeiras linhas------------");
         transactions.stream().limit(10).forEach(System.out::println);
@@ -32,7 +33,7 @@ public class Main {
         System.out.println(transactionBadErro.size());
         transactionBadErro.forEach(System.out::println);
 
-*/
+
         System.out.println("----------------------");
         System.out.println("----------------------");
         System.out.println("tarefa/05-streams");
@@ -53,7 +54,29 @@ public class Main {
 
         System.out.println("Fraudes por tipos: ");
         System.out.println(fraudAnalyzer.isFraudTotalPorTransaction());
+
+        System.out.println("tarefa/06-Benchmark de Busca");
+
+        TransactionRepository transactionRepository;
+        transactionRepository = new  TransactionListRepository(transactions);
+
+        Long startTime = System.nanoTime();
+        String name = "C1868032458";
+        transactionRepository.TransactionsName(name).ifPresentOrElse(System.out::println,
+                () -> System.out.println("Transacao nao encontrada"));
+
+        Long endTime = System.nanoTime();
+
+    System.out.println("Tempo de busca durou em ms: " + (endTime - startTime) / 1_000_000.0);
+
+    transactionRepository = new TransactionMapRepository(transactions);
+
+        startTime = System.nanoTime();
+        transactionRepository.TransactionsName(name).ifPresentOrElse(System.out::println,
+                () -> System.out.println("Transacao nao encontrada"));
+
+        endTime = System.nanoTime();
+        System.out.println("Tempo de busca MAP em ms: " + (endTime - startTime) / 1_000_000.0);
+
     }
-
-
 }
