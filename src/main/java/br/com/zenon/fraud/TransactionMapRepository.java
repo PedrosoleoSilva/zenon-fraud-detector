@@ -22,6 +22,11 @@ public class TransactionMapRepository implements TransactionRepository {
     }
 
     @Override
+    public void save(Transaction t) {
+        this.transactionMap.put(t.origin().name(), t);
+    }
+
+    @Override
     public Optional<Transaction> TransactionsName(String name) {
         return Optional.ofNullable(transactionMap.get(name));
     }
